@@ -1,0 +1,24 @@
+#!/bin/bash
+year=$1
+month=$2
+day=$3
+
+month_list=("01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12")
+day_list=("01" "02" "03" "04" "05" "06" "07" "08" "09")
+month=${month_list[$month]}
+if [[ $day -lt 10 ]]; then
+    day=${day_list[$((day - 1))]}
+fi
+
+select_day_seconds=$(date +%s -d "$year$month$day")
+today_seconds=$(date +%s -d "$(date +%Y%m%d)")
+
+if [[ $select_day_seconds -gt $today_seconds ]]; then
+    days=$(( (select_day_seconds - today_seconds)/86400 ))
+    notify-send "距今天数" "$days天后"
+elif [[ $select_day_seconds -lt $today_seconds ]]; then
+    days=$(( (today_seconds - select_day_seconds)/86400 ))
+    notify-send "距今天数" "$days天前"
+else
+    notify-send "距今天数" "今天"
+fi

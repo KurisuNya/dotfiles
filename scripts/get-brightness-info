@@ -1,0 +1,14 @@
+#! /bin/bash
+value=$(brightnessctl -m | awk -F, '{print $4}' | tr -d "%")
+
+if [[ "$1" = "--value" ]]; then
+    echo "$value"
+elif [[ "$1" = "--icon" ]]; then
+    if [[ $value -lt 34 ]]; then
+        echo "󰃞"
+    elif [[ $value -lt 68 ]]; then
+        echo "󰃟"
+    else
+        echo "󰃠"
+    fi
+fi

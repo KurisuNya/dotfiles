@@ -1,0 +1,11 @@
+#!/bin/bash
+LOCK_FILE="$HOME/.cache/eww-tray.lock"
+EWW="eww -c $HOME/.config/eww/topbar"
+
+if [[ ! -f "$LOCK_FILE" ]]; then
+    touch "$LOCK_FILE"
+    ${EWW} open traybar
+elif [[ -f "$LOCK_FILE" ]]; then
+    ${EWW} close traybar
+    rm "$LOCK_FILE"
+fi

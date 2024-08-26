@@ -1,0 +1,22 @@
+# flags
+[flags]
+hide_table_gap = true
+mem_as_value = true
+tree = true
+
+# layout
+[[row]]
+  ratio=30
+  [[row.child]]
+    ratio=60
+    type="cpu"
+[[row]]
+  ratio=30
+  [[row.child]]
+    ratio=40
+    type="mem"
+[[row]]
+  ratio=40
+  [[row.child]]
+    type="proc"
+    default=true

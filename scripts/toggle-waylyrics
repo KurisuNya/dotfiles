@@ -1,0 +1,10 @@
+#! /bin/bash
+EWW="eww -c $HOME/.config/eww/topbar"
+waylyrics_pid=$(pidof waylyrics)
+if [ -n "$waylyrics_pid" ]; then
+    kill "$waylyrics_pid"
+    ${EWW} update waylyrics_num=0
+else
+    ${EWW} update waylyrics_num=1
+    exec waylyrics
+fi

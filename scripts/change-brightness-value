@@ -1,0 +1,11 @@
+#! /bin/bash
+EWW="eww -c $HOME/.config/eww/topbar"
+if [[ "$1" = "-i" ]]; then
+    brightnessctl set "$2"%+
+elif [[ "$1" = "-d" ]]; then
+    brightnessctl set "$2"%-
+elif [[ "$1" = "-s" ]]; then
+    brightnessctl set "$2"%
+fi
+${EWW} update brightness_value="$(bash ~/.config/scripts/get-brightness-info --value)"
+${EWW} update brightness_icon="$(bash ~/.config/scripts/get-brightness-info --icon)"

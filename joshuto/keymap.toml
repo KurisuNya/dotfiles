@@ -1,0 +1,183 @@
+[default_view]
+
+keymap = [
+  ### explore operation ###
+  # quit
+  { keys = ["ctrl+c"], command = "quit" },
+  { keys = ["Q"], command = "quit --output-current-directory" },
+  { keys = ["escape"], command = "quit --output-current-directory" },
+  # command
+  { keys = [":"], command = ":" },
+  # shell
+  { keys = ["S"], command = "shell fish" },
+  # works
+  { keys = ["w"], command = "show_tasks" },
+  # toggle hidden
+  { keys = ["H"], command = "toggle_hidden" },
+  # help
+  { keys = ["?"], command = "help" },
+
+
+  ### tab operation ###
+  # create
+  { keys = ["alt+t"], command = "new_tab --current" },
+  # close
+  { keys = ["q"], command = "close_tab" },
+  { keys = ["alt+q"], command = "close_tab" },
+  # switch
+  { keys = ["\t"], command = "tab_switch 1" },
+  { keys = ["backtab"], command = "tab_switch -1" },
+  { keys = ["alt+l"], command = "tab_switch 1" },
+  { keys = ["alt+h"], command = "tab_switch -1" },
+  { keys = ["alt+j"], command = "tab_switch 1" },
+  { keys = ["alt+k"], command = "tab_switch -1" },
+  { keys = ["alt+1"], command = "tab_switch_index 1" },
+  { keys = ["alt+2"], command = "tab_switch_index 2" },
+  { keys = ["alt+3"], command = "tab_switch_index 3" },
+  { keys = ["alt+4"], command = "tab_switch_index 4" },
+  { keys = ["alt+5"], command = "tab_switch_index 5" },
+
+
+  ### navigation operation ###
+  # up/down
+  { keys = ["arrow_up"], command = "cursor_move_up" },
+  { keys = ["arrow_down"], command = "cursor_move_down" },
+  { keys = ["j"], command = "cursor_move_down" },
+  { keys = ["k"], command = "cursor_move_up" },
+  { keys = ["J"], command = "cursor_move_down 5" },
+  { keys = ["K"], command = "cursor_move_up 5" },
+  # parent up/down
+  { keys = ["["], command = "parent_cursor_move_up" },
+  { keys = ["]"], command = "parent_cursor_move_down" },
+  # preview up/down
+  { keys = ["ctrl+u"], command = "preview_cursor_move_up" },
+  { keys = ["ctrl+d"], command = "preview_cursor_move_down" },
+  # start/end
+  { keys = ["home"], command = "cursor_move_home" },
+  { keys = ["end"], command = "cursor_move_end" },
+  { keys = ["g", "g"], command = "cursor_move_home" },
+  { keys = ["G"], command = "cursor_move_end" },
+
+  ### file/dir operation ###
+  # open
+  { keys = ["arrow_right"], command = "open" },
+  { keys = ["l"], command = "open" },
+  { keys = ["\n"], command = "open" },
+  { keys = ["o"], command = "open_with" },
+  { keys = ["arrow_left"], command = "cd .." },
+  { keys = ["h"], command = "cd .." },
+  { keys = ["c", "d"], command = ":cd " },
+  { keys = ["z"], command = ":z " },
+  # create
+  { keys = ["f", "t"], command = ":touch " },
+  { keys = ["m", "d"], command = ":mkdir " },
+  # delete
+  { keys = ["delete"], command = "delete_files" },
+  { keys = ["d", "D"], command = "delete_files" },
+  # copy
+  { keys = ["y", "y"], command = "copy_files" },
+  { keys = ["y", "n"], command = "copy_filename" },
+  { keys = ["y", "."], command = "copy_filename_without_extension" },
+  { keys = ["y", "p"], command = "copy_filepath" },
+  { keys = ["y", "d"], command = "copy_dirpath" },
+  # cut
+  { keys = ["d", "d"], command = "cut_files" },
+  # paste
+  { keys = ["p", "p"], command = "paste_files" },
+  { keys = ["p", "o"], command = "paste_files --overwrite=true" },
+  # rename
+  { keys = ["a"], command = "rename_append" },
+  { keys = ["A"], command = "rename_append" },
+  { keys = ["i"], command = "rename_prepend" },
+  { keys = ["I"], command = "rename_prepend" },
+  { keys = ["r"], command = ":rename " },
+  { keys = ["b","r"], command = "bulk_rename" },
+  # chmod
+  { keys = ["="], command = "set_mode" },
+  # select
+  { keys = [" "], command = "select --toggle=true" },
+  { keys = ["t"], command = "select --all=true --toggle=true" },
+  { keys = ["T"], command = "select --all=true --deselect=true" },
+  # sort
+  { keys = ["s", "r"], command = "sort reverse" },
+  { keys = ["s", "l"], command = "sort lexical" },
+  { keys = ["s", "m"], command = "sort mtime" },
+  { keys = ["s", "n"], command = "sort natural" },
+  { keys = ["s", "s"], command = "sort size" },
+  { keys = ["s", "e"], command = "sort ext" },
+  # search
+  { keys = ["/"], command = ":search " },
+  { keys = ["\\"], command = ":search_inc " },
+  { keys = ["f","f"], command = "subdir_fzf" },
+  { keys = ["n"], command = "search_next" },
+  { keys = ["N"], command = "search_prev" },
+  # reload
+  { keys = ["R"], command = "reload_dirlist" },
+
+
+  ### global bookmark ###
+  { keys = ["g", "r"], command = "cd /" },
+  { keys = ["g", "e"], command = "cd /etc" },
+  { keys = ["g", "u"], command = "cd /usr" },
+  { keys = ["g", "m"], command = "cd /run/media/kurisunya" },
+  { keys = ["g", "h"], command = "cd /home/kurisunya" },
+  { keys = ["g", "c"], command = "cd /home/kurisunya/.config" },
+  { keys = ["g", "f"], command = "cd /home/kurisunya/.config/mpv/fonts" },
+  { keys = ["g", "F"], command = "cd /usr/local/share/fonts" },
+  { keys = ["g", "s"], command = "cd /home/kurisunya/.local/share" },
+  { keys = ["g", "p"], command = "cd /home/kurisunya/Pictures" },
+  { keys = ["g", "P"], command = "cd /home/kurisunya/Documents/Projects" },
+  { keys = ["g", "d"], command = "cd /home/kurisunya/Downloads" },
+  { keys = ["g", "D"], command = "cd /home/kurisunya/Documents" },
+  { keys = ["g", "R"], command = "cd /home/kurisunya/Remote" },
+  { keys = ["g", "v"], command = "cd /home/kurisunya/Videos" },
+  { keys = ["g", "w"], command = "cd /home/kurisunya/Webdav" },
+]
+
+[task_view]
+
+keymap = [
+  ### explore operation ###
+  # works
+  { keys = ["w"], command = "show_tasks" },
+  { keys = ["q"], command = "show_tasks" },
+  { keys = ["escape"], command = "show_tasks" },
+
+  ### navigation operation ###
+  # up/down
+  { keys = ["arrow_up"], command = "cursor_move_up" },
+  { keys = ["arrow_down"], command = "cursor_move_down" },
+  { keys = ["j"], command = "cursor_move_down" },
+  { keys = ["k"], command = "cursor_move_up" },
+  { keys = ["J"], command = "cursor_move_down 5" },
+  { keys = ["K"], command = "cursor_move_up 5" },
+  # start/end
+  { keys = ["home"], command = "cursor_move_home" },
+  { keys = ["end"], command = "cursor_move_end" },
+  { keys = ["g", "g"], command = "cursor_move_home" },
+  { keys = ["G"], command = "cursor_move_end" },
+]
+
+[help_view]
+
+keymap = [
+  ### explore operation ###
+  # works
+  { keys = ["w"], command = "show_tasks" },
+  { keys = ["q"], command = "show_tasks" },
+  { keys = ["escape"], command = "show_tasks" },
+
+  ### navigation operation ###
+  # up/down
+  { keys = ["arrow_up"], command = "cursor_move_up" },
+  { keys = ["arrow_down"], command = "cursor_move_down" },
+  { keys = ["j"], command = "cursor_move_down" },
+  { keys = ["k"], command = "cursor_move_up" },
+  { keys = ["J"], command = "cursor_move_down 5" },
+  { keys = ["K"], command = "cursor_move_up 5" },
+  # start/end
+  { keys = ["home"], command = "cursor_move_home" },
+  { keys = ["end"], command = "cursor_move_end" },
+  { keys = ["g", "g"], command = "cursor_move_home" },
+  { keys = ["G"], command = "cursor_move_end" },
+]

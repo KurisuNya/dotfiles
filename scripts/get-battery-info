@@ -1,0 +1,47 @@
+#! /bin/bash
+EWW="eww -c $HOME/.config/eww/topbar"
+function get_capacity {
+    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
+    cat /sys/class/power_supply/"${BAT}"/capacity
+}
+function get_status {
+    BAT=$(ls /sys/class/power_supply | grep BAT | head -n 1)
+    cat /sys/class/power_supply/"${BAT}"/status
+}
+
+battery_low=$(${EWW} get battery_low)
+battery_icon=("" "" "" "" "")
+capacity=$(get_capacity)
+status=$(get_status)
+
+if [[ "$1" = "--icon" ]]; then
+    if [[ $capacity -lt 10 ]]; then
+        echo "${battery_icon[0]}"
+    elif [[ $capacity -lt 40 ]]; then
+        echo "${battery_icon[1]}"
+    elif [[ $capacity -lt 70 ]]; then
+        echo "${battery_icon[2]}"
+    elif [[ $capacity -lt 95 ]]; then
+        echo "${battery_icon[3]}"
+    else
+        echo "${battery_icon[4]}"
+    fi
+elif [[ "$1" = "--status" ]]; then
+    if [[ "$status" = "Charging" ]]; then
+        echo "charging"
+        if [ "$battery_low" == true ] ; then
+            ${EWW} update battery_low=false
+        fi
+    elif [[ $capacity -lt 10 ]]; then
+        echo "low"
+        if [ "$battery_low" == false ] ; then
+            ${EWW} update battery_low=true
+            notify-send "电池电量提醒" "当前电池电量不足10%"
+        fi
+    else
+        echo "normal"
+        if [ "$battery_low" == true ] ; then
+            ${EWW} update battery_low=false
+        fi
+    fi
+fi

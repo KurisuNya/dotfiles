@@ -1,0 +1,8 @@
+#! /bin/bash
+EWW="eww -c $HOME/.config/eww/topbar"
+mic_enable=$(${EWW} get mic_enable)
+if [ "$mic_enable" == true ] ; then
+    ${EWW} update mic_enable=false
+else
+    ${EWW} update mic_enable=true
+fi

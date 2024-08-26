@@ -1,0 +1,24 @@
+#! /bin/bash
+volume=$(pamixer --get-volume-human | tr -d '%')
+if [[ "$volume" = "muted" ]]; then
+    volume=0;
+    status="muted"
+else
+    status="normal"
+fi
+
+if [[ "$1" = "--volume" ]]; then
+    echo "$volume"
+elif [[ "$1" = "--status" ]]; then
+    echo $status
+elif [[ "$1" = "--icon" ]]; then
+    if [[ $status == "muted" ]]; then
+        echo "󰸈"
+    elif [[ $volume -lt 34 ]]; then
+        echo "󰕿"
+    elif [[ $volume -lt 68 ]]; then
+        echo "󰖀"
+    else
+        echo "󰕾"
+    fi
+fi

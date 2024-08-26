@@ -1,0 +1,26 @@
+#!/bin/bash
+wired_status=$(nmcli -g all| grep "enp3s0" | grep "已连接")
+wired_id=$(nmcli c | grep enp3s0 | awk '{print ($1$2)}')
+wifi_status=$(nmcli -g all| grep "wlp1s0" | grep "已连接")
+wifi_ssid=$(nmcli c | grep wlp1s0 | awk '{print ($1)}')
+if [[ $wired_status ]]; then
+    icon="󰲝"
+    status="connected"
+    text="${wired_id}"
+elif [[ $wifi_status ]] ; then
+    icon="󰖩"
+    status="connected"
+    text="${wifi_ssid}"
+else
+    icon=""
+    status="disconnected"
+    text="无连接"
+fi
+
+if [[ "$1" == "--id" ]]; then
+    echo "$text"
+elif [[ "$1" == "--icon" ]]; then
+    echo $icon
+elif [[ "$1" == "--status" ]]; then
+    echo $status
+fi

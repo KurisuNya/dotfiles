@@ -1,0 +1,4 @@
+#! /bin/bash
+time_icon=("󱑋" "󱑌" "󱑍" "󱑎" "󱑏" "󱑐" "󱑑" "󱑒" "󱑓" "󱑔" "󱑕" "󱑖")
+hour=$(date '+%-I')-1
+echo "${time_icon[$hour]}"

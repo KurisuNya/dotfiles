@@ -1,0 +1,3 @@
+[flags]
+hide_table_gap = true
+mem_as_value = true

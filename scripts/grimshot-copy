@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ "$1" = "-s" ]]; then
+    grimshot copy screen
+elif [[ "$1" = "-a" ]]; then
+    grimshot copy area
+fi

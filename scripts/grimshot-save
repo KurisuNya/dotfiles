@@ -1,0 +1,7 @@
+#!/bin/bash
+filename=$(date +%Y-%m-%d-%H-%M-%S.png)
+if [[ "$1" = "-s" ]]; then
+    grimshot save screen "$HOME"/Pictures/Screenshots/"$filename"
+elif [[ "$1" = "-a" ]]; then
+    grimshot save area "$HOME"/Pictures/Screenshots/"$filename"
+fi

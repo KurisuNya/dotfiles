@@ -1,0 +1,337 @@
+;;;;;;;; vars ;;;;;;;;
+(defvar EWW "eww -c $HOME/.config/eww/topbar")
+
+(deflisten all_workspaces :initial "[]" "bash ~/.config/scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/scripts/get-active-workspace")
+(deflisten window_name :initial "..." "bash ~/.config/scripts/get-window-title")
+
+(defpoll current_time :interval "1s" "date '+%H:%M,%b%d日'")
+(defpoll time_icon :interval "1s" "bash ~/.config/scripts/get-time-icon")
+
+(defpoll battery_status :interval "15s" "bash ~/.config/scripts/get-battery-info --status")
+(defpoll battery_icon :interval "15s" "bash ~/.config/scripts/get-battery-info --icon")
+
+(defpoll network_status :interval "3s" "bash ~/.config/scripts/get-network-info --status")
+(defpoll network_icon :interval "3s" "bash ~/.config/scripts/get-network-info --icon")
+(defpoll network_id :interval "3s" "bash ~/.config/scripts/get-network-info --id")
+
+(defvar speaker_status "")
+(defvar speaker_icon "")
+(defvar speaker_volume "")
+(defvar mic_status "")
+(defvar mic_icon "")
+(defvar mic_volume "")
+(defvar mic_enable false)
+(defvar waylyrics_num 0)
+
+(defvar brightness_icon "")
+(defvar brightness_value "")
+(defvar battery_low false)
+;;;;;;;; vars ;;;;;;;;
+
+
+;;;;;;;; left ;;;;;;;;
+(defwidget workspaces []
+  (eventbox 
+    :onscroll "bash ~/.config/scripts/change-active-workspace-eww {} ${current_workspace}" 
+    :class "workspaces-widget"
+    (box 
+      :space-evenly false
+        ; for widget has bug, list all workspaces instead
+        (eventbox 
+          :onclick "hyprctl dispatch workspace 1"
+          (box 
+            :class "workspace-entry ${1 == current_workspace ? "current ${all_workspaces[0].windows > waylyrics_num ? "occupied" : "empty"}" : "${all_workspaces[0].windows > 0 ? "occupied" : "empty"}"}"
+            (label 
+              :text "1"
+            )
+          )
+        )
+        (eventbox 
+          :onclick "hyprctl dispatch workspace 2"
+          (box 
+            :class "workspace-entry ${2 == current_workspace ? "current ${all_workspaces[1].windows > waylyrics_num ? "occupied" : "empty"}" : "${all_workspaces[1].windows > 0 ? "occupied" : "empty"}"}"
+            (label 
+              :text "2"
+            )
+          )
+        )
+        (eventbox 
+          :onclick "hyprctl dispatch workspace 3"
+          (box 
+            :class "workspace-entry ${3 == current_workspace ? "current ${all_workspaces[2].windows > waylyrics_num ? "occupied" : "empty"}" : "${all_workspaces[2].windows > 0 ? "occupied" : "empty"}"}"
+            (label 
+              :text "3"
+            )
+          )
+        )
+        (eventbox 
+          :onclick "hyprctl dispatch workspace 4"
+          (box 
+            :class "workspace-entry ${4 == current_workspace ? "current ${all_workspaces[3].windows > waylyrics_num ? "occupied" : "empty"}" : "${all_workspaces[3].windows > 0 ? "occupied" : "empty"}"}"
+            (label 
+              :text "4"
+            )
+          )
+        )
+        (eventbox 
+          :onclick "hyprctl dispatch workspace 5"
+          (box 
+            :class "workspace-entry ${5 == current_workspace ? "current ${all_workspaces[4].windows > waylyrics_num ? "occupied" : "empty"}" : "${all_workspaces[4].windows > 0 ? "occupied" : "empty"}"}"
+            (label 
+              :text "5"
+            )
+          )
+        )
+    )
+  )
+)
+(defwidget name []
+  (box
+    :class "window-name-widget"
+    (label
+      :text "${window_name}"
+      :limit-width 35
+    )
+  )
+)
+(defwidget left []
+  (box
+    :class "left-side"
+    :orientation "h"
+    :halign "start"
+    :space-evenly false
+    (workspaces)
+    (name)
+  )
+)
+;;;;;;;; left ;;;;;;;;
+
+
+;;;;;;;; right ;;;;;;;;
+(defwidget battery []
+  (eventbox
+    (box
+      :class "battery-widget battery-status-${battery_status}"
+      :orientation "h"
+      :space-evenly false
+      (label
+        :class "battery-icon"
+        :text "${battery_icon}"
+      )
+      (label
+        :class "battery-text"
+        :text "${EWW_BATTERY["BAT0"].capacity}%"
+      )
+    )
+  )
+)
+(defwidget network []
+  (eventbox
+    :onclick "bash ~/.config/scripts/pop-network"
+    (box
+      :class "network-widget network-status-${network_status}"
+      :orientation "h"
+      :space-evenly false
+      (label
+        :class "network-icon"
+        :text "${network_icon}"
+      )
+      (label
+        :class "network-text"
+        :text "${network_id}"
+      )
+    )
+  )
+)
+(defwidget speaker [enable]
+  (box 
+    :orientation "h"
+    :class "speaker-widget"
+    :space-evenly false
+    :visible enable
+    (eventbox
+      :onclick "bash ~/.config/scripts/change-speaker-volume -t"
+      (box
+        (label
+          :class "speaker-icon speaker-status-${speaker_status}"
+          :text "${speaker_icon}"
+        )
+      )
+    )
+    (scale 
+      :class "speaker-scale"
+      :min 0
+      :max 101
+      :value speaker_volume
+      :onchange "bash ~/.config/scripts/change-speaker-volume -s {}"
+    )
+    (eventbox
+      :onclick "${EWW} update mic_enable=${!mic_enable}"
+      (box
+        (label
+          :class "speaker-text"
+          :text "${speaker_volume}%"
+        )
+      )
+    )
+  )
+)
+(defwidget mic [enable]
+  (box 
+    :orientation "h"
+    :class "mic-widget"
+    :space-evenly false
+    :visible enable
+    (eventbox
+      :onclick "bash ~/.config/scripts/change-mic-volume -t"
+      (box
+        (label
+          :class "mic-icon mic-status-${mic_status}"
+          :text "${mic_icon}"
+        )
+      )
+    )
+    (scale 
+      :class "mic-scale"
+      :min 0
+      :max 101
+      :value mic_volume
+      :onchange "bash ~/.config/scripts/change-mic-volume -s {}"
+    )
+    (eventbox
+      :onclick "${EWW} update mic_enable=${!mic_enable}"
+      (box
+        (label
+          :class "mic-text"
+          :text "${mic_volume}%"
+        )
+      )
+    )
+  )
+)
+(defwidget volume []
+  (box
+      :orientation "h"
+      :space-evenly false
+      (mic :enable mic_enable)
+      (speaker :enable {!mic_enable})
+  )
+)
+(defwidget brightness []
+  (box 
+    :orientation "h"
+    :class "brightness-widget"
+    :space-evenly false
+    (label
+      :class "brightness-icon"
+      :text "${brightness_icon}"
+    )
+    (scale 
+      :class "brightness-scale"
+      :min 0
+      :max 101
+      :value brightness_value
+      :onchange "bash ~/.config/scripts/change-brightness-value -s {}"
+    )
+    (label
+      :class "brightness-text"
+      :text "${brightness_value}%"
+    )
+  )
+)
+(defwidget right []
+  (box
+    :class "right-side"
+    :orientation "h"
+    :halign "end"
+    :space-evenly false
+    (brightness)
+    (volume)
+    (network)
+    (battery)
+  )
+)
+;;;;;;;; right ;;;;;;;;
+
+
+;;;;;;;; middle ;;;;;;;;
+(defwidget time []
+  (eventbox
+    :onclick "bash ~/.config/scripts/notify-date"
+    (box
+      :class "time-widget time-battery-status-${battery_status}"
+      :orientation "h"
+      :space-evenly false
+      (label
+        :class "time-icon"
+        :text "${time_icon}"
+      )
+      (label
+        :class "time-text"
+        :text "${current_time}"
+      )
+    )
+  )
+)
+(defwidget middle []
+  (box
+    :class "the-middle"
+    :orientation "h"
+    :halign "center"
+    :space-evenly false
+    (time)
+  )
+)
+;;;;;;;; middle ;;;;;;;;
+
+
+;;;;;;;; final ;;;;;;;;
+(defwidget bar []
+  (centerbox 
+    :orientation "h"
+    (left)
+    (middle)
+    (right)
+  )
+)
+
+(defwindow topbar
+  :monitor 0
+  :geometry 
+  (
+    geometry 
+      :x "0%"
+      :y "0%"
+      :width "1436px"
+      :height "30px"
+      :anchor "top center"
+  )
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  :namespace "top_bar"
+  (bar)
+)
+(defwindow traybar
+  :monitor 0
+  :geometry 
+  (
+    geometry 
+      :x "5px"
+      :y "6px"
+      :width "30px"
+      :anchor "top right"
+  )
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  :namespace "top_bar"
+  (systray
+    :halign "center"
+    :valign "center"
+    :space-evenly true
+    :spacing 4
+    :class "systray"
+  )
+)
