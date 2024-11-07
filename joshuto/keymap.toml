@@ -4,12 +4,12 @@ keymap = [
   ### explore operation ###
   # quit
   { keys = ["ctrl+c"], command = "quit" },
-  { keys = ["Q"], command = "quit --output-current-directory" },
-  { keys = ["escape"], command = "quit --output-current-directory" },
+  { keys = ["Q"], command = "quit" },
+  { keys = ["escape"], command = "quit" },
   # command
   { keys = [":"], command = ":" },
-  # shell
-  { keys = ["S"], command = "shell fish" },
+  # return shell
+  { keys = ["S"], command = "quit --output-current-directory" },
   # works
   { keys = ["w"], command = "show_tasks" },
   # toggle hidden
@@ -91,7 +91,7 @@ keymap = [
   { keys = ["i"], command = "rename_prepend" },
   { keys = ["I"], command = "rename_prepend" },
   { keys = ["r"], command = ":rename " },
-  { keys = ["b","r"], command = "bulk_rename" },
+  { keys = ["b", "r"], command = "bulk_rename" },
   # chmod
   { keys = ["="], command = "set_mode" },
   # select
@@ -108,7 +108,7 @@ keymap = [
   # search
   { keys = ["/"], command = ":search " },
   { keys = ["\\"], command = ":search_inc " },
-  { keys = ["f","f"], command = "subdir_fzf" },
+  { keys = ["f", "f"], command = "subdir_fzf" },
   { keys = ["n"], command = "search_next" },
   { keys = ["N"], command = "search_prev" },
   # reload

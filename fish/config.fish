@@ -20,13 +20,17 @@ if status is-interactive
   # fzf bind
   fzf_configure_bindings --history=\ch --directory=\cf --git_log=\cl --git_status=\cs --processes=\cp
 
+  # zoxide
+  zoxide init fish | source
+
   # venv prompt
-  functions -c fish_prompt _old_fish_prompt
+  export VIRTUAL_ENV_DISABLE_PROMPT=1
+  functions -c fish_prompt _old_prompt
   function fish_prompt
     if set -q VIRTUAL_ENV
       echo -n -s (set_color yellow) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
     end
-    _old_fish_prompt
+    _old_prompt
   end
 end
 
