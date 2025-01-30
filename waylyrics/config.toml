@@ -52,15 +52,38 @@ player-name-blacklist = ["firefox"]
 # player with these identity will be ignored
 player-identity-blacklist = []
 
+# Color scheme used for Gtk interface -- light, dark or auto (use system)
+# Not supported on Windows.
+color-scheme = "auto"
+
+# Whether to use <name>-dark.css when system is in dark mode
+theme-dark-switch = false
+
 [triggers]
 # shortcuts when focusing on waylyrics
 # for global ones, please install the `.desktop` file
 # also check trigger format at https://docs.gtk.org/gtk4/ctor.ShortcutTrigger.parse_string.html
+
+# whether to show GTK+ CSD
 switch_decoration = "<Control>d"
+
+# reapply current theme file
 reload_theme = "<Control><Shift>t"
+
+# manually search lyric
 search_lyric = "<Control>s"
+
+# try to refetch lyric
 refetch_lyric = "<Alt><Shift>l"
+
+# whether to allow mouse click-through
 switch_passthrough = "<Alt>p"
 
 [qqmusic]
 # QQMusic config
+# With `cookies` as `name=value; name1=value1;` format,
+# waylyrics will set cookies for the QQMusicApi service at startup.
+
+# QQMusicApi api url
+# example: "http://127.0.0.1:11451"
+api_base_url = "http://127.0.0.1:3300"

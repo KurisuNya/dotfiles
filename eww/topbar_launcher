@@ -1,22 +1,20 @@
 #!/bin/bash
 FILE="$HOME/.cache/eww.launched"
-LOG="/tmp/eww/eww_f5a2b6d0692f81bb.log"
 EWW="eww -c $HOME/.config/eww/topbar"
 
 run_eww() {
 	if [[ ! $(pidof eww) ]]; then
 		${EWW} daemon
-		# sleep 5
 	fi
 	${EWW} open topbar
-	${EWW} update mic_volume=$(bash ~/.config/scripts/get-mic-info --volume)
-	${EWW} update mic_icon=$(bash ~/.config/scripts/get-mic-info --icon)
-	${EWW} update mic_status=$(bash ~/.config/scripts/get-mic-info --status)
-	${EWW} update speaker_volume=$(bash ~/.config/scripts/get-speaker-info --volume)
-	${EWW} update speaker_icon=$(bash ~/.config/scripts/get-speaker-info --icon)
-	${EWW} update speaker_status=$(bash ~/.config/scripts/get-speaker-info --status)
-	${EWW} update brightness_value=$(bash ~/.config/scripts/get-brightness-info --value)
-	${EWW} update brightness_icon=$(bash ~/.config/scripts/get-brightness-info --icon)
+	${EWW} update mic_volume=$(bash ~/.local/share/scripts/system/get-mic-info --volume)
+	${EWW} update mic_icon=$(bash ~/.local/share/scripts/system/get-mic-info --icon)
+	${EWW} update mic_status=$(bash ~/.local/share/scripts/system/get-mic-info --status)
+	${EWW} update speaker_volume=$(bash ~/.local/share/scripts/system/get-speaker-info --volume)
+	${EWW} update speaker_icon=$(bash ~/.local/share/scripts/system/get-speaker-info --icon)
+	${EWW} update speaker_status=$(bash ~/.local/share/scripts/system/get-speaker-info --status)
+	${EWW} update brightness_value=$(bash ~/.local/share/scripts/system/get-brightness-info --value)
+	${EWW} update brightness_icon=$(bash ~/.local/share/scripts/system/get-brightness-info --icon)
 }
 
 if [[ ! -f "$FILE" ]]; then
@@ -32,5 +30,4 @@ else
 	rm "$FILE"
 fi
 
-# sleep 1
-rm "$LOG"
+rm /tmp/eww/eww*.log

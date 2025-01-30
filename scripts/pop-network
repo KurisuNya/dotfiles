@@ -1,3 +1,0 @@
-#!/bin/bash
-nmcli device wifi rescan
-kitty --class nmtui -1 -e nmtui

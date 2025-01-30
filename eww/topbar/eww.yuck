@@ -1,19 +1,19 @@
 ;;;;;;;; vars ;;;;;;;;
 (defvar EWW "eww -c $HOME/.config/eww/topbar")
 
-(deflisten all_workspaces :initial "[]" "bash ~/.config/scripts/get-workspaces")
-(deflisten current_workspace :initial "1" "bash ~/.config/scripts/get-active-workspace")
-(deflisten window_name :initial "..." "bash ~/.config/scripts/get-window-title")
+(deflisten all_workspaces :initial "[]" "bash ~/.local/share/scripts/hypr/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.local/share/scripts/hypr/get-active-workspace")
+(deflisten window_name :initial "..." "bash ~/.local/share/scripts/hypr/get-window-title")
 
 (defpoll current_time :interval "1s" "date '+%H:%M,%b%d日'")
-(defpoll time_icon :interval "1s" "bash ~/.config/scripts/get-time-icon")
+(defpoll time_icon :interval "1s" "bash ~/.local/share/scripts/system/get-time-icon")
 
-(defpoll battery_status :interval "15s" "bash ~/.config/scripts/get-battery-info --status")
-(defpoll battery_icon :interval "15s" "bash ~/.config/scripts/get-battery-info --icon")
+(defpoll battery_status :interval "15s" "bash ~/.local/share/scripts/system/get-battery-info --status")
+(defpoll battery_icon :interval "15s" "bash ~/.local/share/scripts/system/get-battery-info --icon")
 
-(defpoll network_status :interval "3s" "bash ~/.config/scripts/get-network-info --status")
-(defpoll network_icon :interval "3s" "bash ~/.config/scripts/get-network-info --icon")
-(defpoll network_id :interval "3s" "bash ~/.config/scripts/get-network-info --id")
+(defpoll network_status :interval "3s" "bash ~/.local/share/scripts/system/get-network-info --status")
+(defpoll network_icon :interval "3s" "bash ~/.local/share/scripts/system/get-network-info --icon")
+(defpoll network_id :interval "3s" "bash ~/.local/share/scripts/system/get-network-info --id")
 
 (defvar speaker_status "")
 (defvar speaker_icon "")
@@ -33,7 +33,7 @@
 ;;;;;;;; left ;;;;;;;;
 (defwidget workspaces []
   (eventbox 
-    :onscroll "bash ~/.config/scripts/change-active-workspace-eww {} ${current_workspace}" 
+    :onscroll "bash ~/.local/share/scripts/hypr/change-active-workspace {} ${current_workspace}" 
     :class "workspaces-widget"
     (box 
       :space-evenly false
@@ -128,7 +128,7 @@
 )
 (defwidget network []
   (eventbox
-    :onclick "bash ~/.config/scripts/pop-network"
+    :onclick "bash ~/.local/share/scripts/system/pop-network"
     (box
       :class "network-widget network-status-${network_status}"
       :orientation "h"
@@ -151,7 +151,7 @@
     :space-evenly false
     :visible enable
     (eventbox
-      :onclick "bash ~/.config/scripts/change-speaker-volume -t"
+      :onclick "bash ~/.local/share/scripts/bar/change-speaker-volume -t"
       (box
         (label
           :class "speaker-icon speaker-status-${speaker_status}"
@@ -164,7 +164,7 @@
       :min 0
       :max 101
       :value speaker_volume
-      :onchange "bash ~/.config/scripts/change-speaker-volume -s {}"
+      :onchange "bash ~/.local/share/scripts/bar/change-speaker-volume -s {}"
     )
     (eventbox
       :onclick "${EWW} update mic_enable=${!mic_enable}"
@@ -184,7 +184,7 @@
     :space-evenly false
     :visible enable
     (eventbox
-      :onclick "bash ~/.config/scripts/change-mic-volume -t"
+      :onclick "bash ~/.local/share/scripts/bar/change-mic-volume -t"
       (box
         (label
           :class "mic-icon mic-status-${mic_status}"
@@ -197,7 +197,7 @@
       :min 0
       :max 101
       :value mic_volume
-      :onchange "bash ~/.config/scripts/change-mic-volume -s {}"
+      :onchange "bash ~/.local/share/scripts/bar/change-mic-volume -s {}"
     )
     (eventbox
       :onclick "${EWW} update mic_enable=${!mic_enable}"
@@ -232,7 +232,7 @@
       :min 0
       :max 101
       :value brightness_value
-      :onchange "bash ~/.config/scripts/change-brightness-value -s {}"
+      :onchange "bash ~/.local/share/scripts/bar/change-brightness-value -s {}"
     )
     (label
       :class "brightness-text"
@@ -258,7 +258,7 @@
 ;;;;;;;; middle ;;;;;;;;
 (defwidget time []
   (eventbox
-    :onclick "bash ~/.config/scripts/notify-date"
+    :onclick "bash ~/.local/share/scripts/system/notify-date"
     (box
       :class "time-widget time-battery-status-${battery_status}"
       :orientation "h"
@@ -304,7 +304,7 @@
       :x "0%"
       :y "0%"
       :width "1436px"
-      :height "30px"
+      :height "20px"
       :anchor "top center"
   )
   :stacking "fg"

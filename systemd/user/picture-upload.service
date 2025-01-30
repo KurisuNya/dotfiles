@@ -1,8 +1,0 @@
-[Unit]
-Description=Upload picture to lsky
-
-[Service]
-Type=oneshot
-WorkingDirectory=/home/kurisunya/.config/scripts/lsky-auto-upload
-ExecStart=python /home/kurisunya/.config/scripts/lsky-auto-upload/auto_upload.py
-PrivateTmp=true

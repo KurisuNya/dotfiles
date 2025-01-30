@@ -7,7 +7,8 @@ if status is-interactive
     end
   else  # login with laptop
     if test -z "$DISPLAY" -a $XDG_VTNR = 1
-      uwsm start hyprland.desktop
+      Hyprland
+      # uwsm start hyprland.desktop
     end
   end
 

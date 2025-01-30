@@ -1,6 +1,6 @@
 * {
   all: unset;
-  font-family: "DejavuSansMono NFM";
+  font-family: "monospace";
 }
 
 // global style
@@ -10,13 +10,6 @@
   border: 1px solid;
   border-radius: 5px;
   border-color: #bb9af7;
-}
-.calendarbar {
-  background-color: #24283b;
-  color: #a9b1d6;
-  border: 1px solid;
-  border-radius: 5px;
-  border-color: #f7768e;
 }
 .traybar {
   background-color: #24283b;
@@ -28,27 +21,6 @@
 .systray {
   border: none;
   margin: 4px;
-}
-
-// calendar style
-.cal-text {
-  padding: 5px;
-  padding-bottom: 1px;
-}
-.cal-text:indeterminate {
-  color: #414868;
-}
-.cal-text.header {
-  color: #c0caf5;
-}
-.cal-text.button {
-  color: #c0caf5;
-}
-.cal-text.highlight {
-  color: #c0caf5;
-}
-.cal-text:selected {
-  color: #f7768e;
 }
 
 // workspace style
@@ -69,6 +41,7 @@
 // window name style
 .window-name-widget {
   margin: 4px;
+  padding-bottom: 2px;
   font-size: small;
   color: #787c99;
 }
@@ -98,10 +71,12 @@
 }
 .battery-icon {
   font-size: xx-large;
+  padding-bottom: 1px;
 }
 .battery-text {
   margin: 2px;
-  margin-right: 10px;
+  margin-right: 7px;
+  margin-left: 3px;
   font-size: small;
 }
 
@@ -134,7 +109,7 @@
   color: #787c99;
   font-size: x-small;
   min-width: 30px;
-  margin-right: 12px;
+  margin-right: 10px;
 }
 .speaker-status-muted {
   color: #f7768e;
@@ -159,7 +134,7 @@
   color: #787c99;
   font-size: x-small;
   min-width: 30px;
-  margin-right: 12px;
+  margin-right: 10px;
 }
 .mic-status-muted {
   color: #f7768e;
@@ -179,12 +154,13 @@
 //brightness style
 .brightness-icon {
   font-size: xx-large;
+  padding-bottom: 1px;
 }
 .brightness-text {
   color: #787c99;
   font-size: x-small;
   min-width: 30px;
-  margin-right: 14px;
+  margin-right: 12px;
 }
 .brightness-scale trough {
   background-color: #414868;

@@ -1,8 +1,0 @@
-#!/bin/bash
-for i in {1..10}; do
-	sleep 5
-	if [ -n "$(curl -s https://kurisunya.top | grep html)" ]; then
-		rclone mount KurisuNya: /home/kurisunya/Webdav/ --vfs-cache-mode full --no-modtime --daemon
-		break
-	fi
-done
