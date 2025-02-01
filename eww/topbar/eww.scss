@@ -1,6 +1,6 @@
 * {
   all: unset;
-  font-family: "monospace";
+  font-family: "DejaVuSansM Nerd Font Mono";
 }
 
 // global style
@@ -51,7 +51,8 @@
   margin-left: 7px;
 }
 .time-icon {
-  font-size: xx-large;
+  font-size: 26px;
+  padding-top: 1px;
 }
 .time-text {
   margin: 2px;
@@ -70,7 +71,7 @@
   color: #73daca;
 }
 .battery-icon {
-  font-size: xx-large;
+  font-size: 29px;
   padding-bottom: 1px;
 }
 .battery-text {
@@ -90,7 +91,7 @@
   min-width: 38px;
 }
 .network-icon {
-  font-size: xx-large;
+  font-size: 26px;
 }
 .network-text {
   margin: 2px;
@@ -103,7 +104,7 @@
 
 //speaker style
 .speaker-icon {
-  font-size: xx-large;
+  font-size: 22px;
 }
 .speaker-text {
   color: #787c99;
@@ -128,7 +129,7 @@
 
 //mic style
 .mic-icon {
-  font-size: xx-large;
+  font-size: 22px;
 }
 .mic-text {
   color: #787c99;
@@ -153,7 +154,7 @@
 
 //brightness style
 .brightness-icon {
-  font-size: xx-large;
+  font-size: 28px;
   padding-bottom: 1px;
 }
 .brightness-text {
