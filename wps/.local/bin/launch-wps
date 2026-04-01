@@ -1,0 +1,10 @@
+#! /bin/bash
+
+wps_pid=$(pidof wps)
+if [ -n "$wps_pid" ]; then
+	wps "$@"
+else
+	setsid wps &
+	sleep 1.5
+	wps "$@"
+fi

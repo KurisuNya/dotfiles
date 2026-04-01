@@ -1,0 +1,14 @@
+#!/bin/bash
+brightness_file=/sys/class/leds/platform::kbd_backlight/brightness
+case $(cat "$brightness_file") in
+0)
+	brightness=1
+	;;
+1)
+	brightness=2
+	;;
+*)
+	brightness=0
+	;;
+esac
+echo "$brightness" >"$brightness_file"

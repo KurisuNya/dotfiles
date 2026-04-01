@@ -1,0 +1,14 @@
+[Default Applications]
+text/html=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
+x-scheme-handler/baiduyunguanjia=baidunetdisk.desktop
+x-scheme-handler/orpheus=SPlayer.desktop
+application/pdf=org.gnome.Evince.desktop
+text/plain=nvim-terminal.desktop
+
+[Added Associations]
+application/pdf=wps-office-pdf.desktop;org.gnome.Evince.desktop;
+text/plain=nvim-terminal.desktop;

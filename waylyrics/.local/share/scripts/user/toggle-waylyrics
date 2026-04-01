@@ -1,0 +1,7 @@
+#! /bin/bash
+waylyrics_pid=$(pidof waylyrics)
+if [ -n "$waylyrics_pid" ]; then
+    kill "$waylyrics_pid"
+else
+    exec waylyrics
+fi

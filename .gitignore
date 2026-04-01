@@ -1,0 +1,6 @@
+# syncthing
+.stfolder
+
+# fonts
+fonts/.local/share/fonts
+mpv/.config/mpv/fonts

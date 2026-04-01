@@ -1,0 +1,27 @@
+#! /bin/bash
+
+AVAILABLE_MODE=("copy" "save" "copysave")
+AVAILABLE_REGION=("output" "area")
+FILENAME_FORMAT="Screenshot_%Y%m%d-%H%M%S.png"
+FLAGS="--notify --freeze"
+
+mode=$1
+region=$2
+save_path=$3
+
+if [[ ! " ${AVAILABLE_MODE[@]} " =~ " ${mode} " ]]; then
+  exit 1
+fi
+if [[ ! " ${AVAILABLE_REGION[@]} " =~ " ${region} " ]]; then
+  exit 1
+fi
+
+if [ "$mode" == "save" ] || [ "$mode" == "copysave" ]; then
+  if [ -z "$save_path" ]; then
+    save_path="."
+  fi
+  filepath="$save_path/$(date +${FILENAME_FORMAT})"
+  grimblast ${mode} ${region} $filepath ${FLAGS}
+else
+  grimblast ${mode} ${region} ${FLAGS}
+fi

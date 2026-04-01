@@ -1,0 +1,8 @@
+#! /bin/bash
+color=$(hyprpicker)
+if [ -n "$color" ]; then
+    wl-copy "$color"
+    notify-send "Color Picker" "Color $color copied to clipboard." -i color-picker
+else
+    notify-send "Color Picker" "No color selected." -i color-picker
+fi

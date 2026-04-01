@@ -1,0 +1,28 @@
+* {
+  all: unset;
+  font-family: "Zpix";
+}
+window {
+  background-color: rgba(0, 0, 0, 0);
+}
+label#above,
+label#below {
+  border-radius: 3px;
+  font-size: 24px;
+  color: rgba(247, 118, 142, 1);
+  background-color: rgba(34, 38, 56, 0.8);
+  padding: 10px;
+}
+label#below {
+  border-radius: 3px;
+  font-size: 18px;
+  margin: 5px 0px;
+  padding: 8px;
+}
+
+window {
+  box-shadow: 0px 0px 0px 0px;
+}
+headerbar {
+  opacity: 0.5;
+}

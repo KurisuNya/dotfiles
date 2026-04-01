@@ -1,0 +1,25 @@
+[user]
+	email = cuizhu1216@gmail.com
+	name = KurisuNya
+[include]
+	path = ~/.config/delta/themes.gitconfig
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[merge]
+	conflictstyle = zdiff3
+[delta]
+	dark = true
+	line-numbers = true
+	side-by-side = true
+	hunk-header-style = omit
+	syntax-theme = tokyonight_storm
+[credential]
+	helper = store
+[safe]
+	directory = /opt/flutter
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
