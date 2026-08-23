@@ -1,4 +1,7 @@
 
+# auto connect to a player if last was disconnected/waylyrics was idle
+auto-connect = true
+
 # the interval waylyrics updates position/metadata from player
 player-sync-interval = "1s"
 
@@ -33,8 +36,11 @@ extract-translated-lyric = true
 # inspired by LyricX's filter list
 filter-regexies = ["^作词", "^作詞", "^作曲", "^編曲", "^编曲", "^収録", "^收录", "^演唱", "^歌手", "^歌曲", "^制作", "^製作", "^歌词", "^歌詞", "^翻譯", "^翻译", "^插曲", "^插入歌", "^主题歌", "^主題歌", "^片頭曲", "^片头曲", "^片尾曲", "^SoundTrack", "^アニメ"]
 
-# avaliable options: 网易云音乐, QQ音乐, LRCLib
+# available options: 网易云音乐, QQ音乐, LRCLib
 lyric-search-source = ["网易云音乐"]
+
+# skip auto search on new track
+skip-auto-search = false
 
 # if enabled, waylyrics will set `DEFAULT_TEXT` on idle,
 # otherwise it just show nothing

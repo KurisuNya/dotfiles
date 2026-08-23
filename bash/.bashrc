@@ -9,8 +9,13 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
+# ghcup
 export PATH=$PATH:~/.local/bin
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 if [[ $(ps --no-header --pid=$PPID --format=cmd) != "fish" ]]; then
 	if [ -z "$BASH_EXECUTION_STRING" ]; then exec fish; fi

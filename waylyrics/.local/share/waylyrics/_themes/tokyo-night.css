@@ -8,14 +8,14 @@ window {
 label#above,
 label#below {
   border-radius: 3px;
-  font-size: 24px;
+  font-size: 22px;
   color: rgba(247, 118, 142, 1);
   background-color: rgba(34, 38, 56, 0.8);
-  padding: 10px;
+  padding: 5px;
 }
 label#below {
   border-radius: 3px;
-  font-size: 18px;
+  font-size: 16px;
   margin: 5px 0px;
   padding: 8px;
 }
